@@ -11,8 +11,13 @@
         "hyprland/submap"
     ],
     "modules-center": [
-        "sway/window"
+        "hyprland/window"
     ],
+    "hyprland/window": {
+        "max-length": 80,
+        "format": "{}"
+    }
+
     "modules-right": [
         "idle_inhibitor",
         "pulseaudio",
