@@ -27,7 +27,8 @@
         "hyprland/language",
         "custom/media",
         "clock",
-        "tray"
+        "tray",
+        "custom/power"
     ],
     "keyboard-state": {
         "numlock": true,
