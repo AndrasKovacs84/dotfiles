@@ -1,7 +1,15 @@
 export EDITOR=vim
 
-export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$HOME/.cargo/bin:$PATH"
 export VCPKG_ROOT="$HOME/vcpkg/"
+
+nv() {
+  if [ $# -eq 0 ]; then
+    nohup neovide > /dev/null 2>&1 &
+  else
+    nohup neovide "$1" > /dev/null 2>&1 &
+  fi
+}
 
 eval "$(starship init zsh)"
 
