@@ -2,6 +2,14 @@
 -- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
+if vim.g.neovide then
+  vim.g.neovide_transparency = 0.7
+  vim.g.neovide_remember_window_size = true
+  vim.g.neovide_cursor_vfx_mode = "railgun"
+  --vim.o.guifont = "Source Code Pro:h14"
+  vim.o.guifont = "Cascadia Code NF:h14"
+end
+
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore
   local result = vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
