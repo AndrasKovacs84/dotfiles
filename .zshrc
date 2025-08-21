@@ -11,6 +11,8 @@ nv() {
   fi
 }
 
+alias lzg='lazygit'
+
 eval "$(starship init zsh)"
 
 alias wezterm='flatpak run org.wezfurlong.wezterm'
