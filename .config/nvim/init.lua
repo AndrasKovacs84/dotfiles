@@ -3,7 +3,7 @@
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 if vim.g.neovide then
-  vim.g.neovide_transparency = 0.7
+  vim.g.neovide_transparency = 0.8 
   vim.g.neovide_remember_window_size = true
   vim.g.neovide_cursor_vfx_mode = "railgun"
   --vim.o.guifont = "Source Code Pro:h14"
