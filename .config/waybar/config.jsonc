@@ -19,12 +19,12 @@
     },
 
     "modules-right": [
-        "idle_inhibitor",
+        // "idle_inhibitor",
         "pulseaudio",
         //"network",
         //"cpu",
         //"memory",
-        "hyprland/language",
+        // "hyprland/language",
         "custom/media",
         "clock",
         "tray",
