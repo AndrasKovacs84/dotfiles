@@ -14,6 +14,8 @@ wallpaper=$(find "$WALLPAPERS" -type f | shuf -n 1)
 
 wal -q -i "$wallpaper"
 
+pkill -SIGUSR2 waybar
+
 duration=$(shuf -n 1 -e "${DURATIONS[@]}")
 
 swww img "$wallpaper" --transition-type "random" --transition-duration "$duration"
