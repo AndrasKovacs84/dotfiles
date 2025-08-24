@@ -1,0 +1,62 @@
+@import '../../.cache/wal/colors-waybar.css';
+
+* {
+	font-family: "Cascadia Code NF";
+	background-image: none;
+	box-shadow: none;
+	transition: 20ms;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.1);
+	padding: 20px;
+}
+
+button {
+  color: #FFFFFF;
+	background-color: @color1;
+
+	font-size: 50px;
+
+  border-radius: 0;
+  border-color: black; 
+	border-style: solid;
+	border-width: 0px;
+
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25%;
+
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+button:focus, button:active, button:hover {
+	background-color: @foreground;
+	border: 0px solid @foreground;
+	outline-style: none;
+}
+
+#logout {
+	border-radius: 50px;
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+	border-radius: 50px;
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+	border-radius: 50px;
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+	border-radius: 50px;
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+	border-radius: 50px;
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
