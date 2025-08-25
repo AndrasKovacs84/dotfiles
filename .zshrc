@@ -13,6 +13,8 @@ nv() {
 
 alias lzg='lazygit'
 
+alias dotconf='neovide ~/.dotfiles &'
+
 eval "$(starship init zsh)"
 
 alias wezterm='flatpak run org.wezfurlong.wezterm'
