@@ -13,49 +13,36 @@ return {
             dapui.setup()
             require("nvim-dap-virtual-text").setup {}
 
-            -- Optional UI open/close on start/stop
             dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
             dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
             dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
-            local codelldb_path = vim.fn.expand "~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb"
-            local liblldb_path =
-                vim.fn.expand "~/.local/share/nvim/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
-
-            vim.fn.setenv("DAP_LOG_FILE", "/tmp/dap.log")
-            vim.fn.setenv("DAP_VERBOSE", "1")
-            dap.adapters.codelldb = {
-                type = "server",
-                port = "13000",
-                executable = {
-                    command = codelldb_path,
-                    args = { "--liblldb", liblldb_path, "--port", "13000" },
-                },
+            -- 🧠 CPPDBG adapter via cpptools (GDB backend)
+            dap.adapters.cppdbg = {
+                id = "cppdbg",
+                type = "executable",
+                command = vim.fn.stdpath "data" .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
             }
 
             dap.configurations.cpp = {
                 {
-                    name = "Launch file",
-                    type = "codelldb",
+                    name = "Launch file (GDB)",
+                    type = "cppdbg",
                     request = "launch",
                     program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
                     cwd = "${workspaceFolder}",
-                    stopOnEntry = true,
-                    args = {},
+                    stopAtEntry = true,
+                    MIMode = "gdb",
                     setupCommands = {
                         {
-                            text = "settings set target.load-cwd-lldbinit false",
-                        },
-                        {
-                            text = "settings set symbols.enable-external-lookup false",
-                        },
-                        {
-                            text = "settings set target.source-map /usr/src/debug /dev/null",
+                            description = "Enable pretty-printing for gdb",
+                            text = "-enable-pretty-printing",
+                            ignoreFailures = true,
                         },
                     },
                 },
             }
-            -- You can also use the same config for C and Rust
+
             dap.configurations.c = dap.configurations.cpp
             dap.configurations.rust = dap.configurations.cpp
         end,
