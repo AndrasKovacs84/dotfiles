@@ -25,15 +25,25 @@ button {
 
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 25%;
-
+	background-size: 10%;
+	animation: gradient_f 20s ease-in infinite;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-button:focus, button:active, button:hover {
+button:focus, button:active {
 	background-color: @foreground;
+	background-size: 20%;
+	animation: gradient_f 20s ease-in infinite;
+	transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
 	border: 0px solid @foreground;
 	outline-style: none;
+}
+
+button:hover {
+	background-color: @foreground;
+  background-size: 25%;
+  animation: gradient_f 20s ease-in infinite;
+  transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
 }
 
 #logout {
