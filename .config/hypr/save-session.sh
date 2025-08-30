@@ -12,7 +12,12 @@ while read -r entry; do
   title=$(echo "$entry" | jq -r '.title')
   workspace=$(echo "$entry" | jq -r '.workspace.id')
   floating=$(echo "$entry" | jq -r '.floating')
-
+  flatpak_id=$(flatpak ps --columns=pid,application | while read fpid fid; do
+  if pstree -s -p "$fpid" | grep -q "($pid)"; then
+    echo "$fid"
+    break
+  fi
+  done)
   # Extract x, y from .at[] array, and width/height from .size
   x=$(echo "$entry" | jq -r '.at[0]')
   y=$(echo "$entry" | jq -r '.at[1]')
@@ -34,7 +39,9 @@ while read -r entry; do
     --argjson y "$y" \
     --argjson width "$width" \
     --argjson height "$height" \
+    --argjson pid "$pid" \
     --arg cmdline "$cmdline" \
+    --arg flatpak_id "$flatpak_id" \
     '{
       class: $class,
       title: $title,
@@ -46,7 +53,9 @@ while read -r entry; do
         width: $width,
         height: $height
       },
-      cmdline: $cmdline
+      pid: $pid,
+      cmdline: $cmdline,
+      flatpak_id: $flatpak_id
     }')"
   )
 done < <(echo "$clients" | jq -c '.[]')
