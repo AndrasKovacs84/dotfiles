@@ -48,6 +48,9 @@ log() {
   logger -t graceful-shutdown "$1"
 }
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+"$SCRIPT_DIR/save-session.sh"
+
 log "[+] Graceful shutdown initiated with action: $action (dry-run: $dry_run)"
 
 # Collect all window addresses
