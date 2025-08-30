@@ -12,7 +12,7 @@
 }
 {
     "label" : "shutdown",
-    "action" : "systemctl poweroff",
+    "action" : "/home/apha/.dotfiles/.config/hypr/shutdown.sh --shutdown",
     "text" : "[s]hutdown",
     "keybind" : "s",
 }
@@ -24,7 +24,7 @@
 }
 {
     "label" : "reboot",
-    "action" : "systemctl reboot",
+    "action" : "/home/apha/.dotfiles/.config/hypr/shutdown.sh --reboot",
     "text" : "[r]eboot",
     "keybind" : "r",
 }

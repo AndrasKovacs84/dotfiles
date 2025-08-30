@@ -49,7 +49,7 @@ log() {
 }
 
 log "[+] Graceful shutdown initiated with action: $action (dry-run: $dry_run)"
-#
+
 # Collect all window addresses
 window_addresses=$(hyprctl clients -j | jq -r '.[].address')
 
@@ -57,16 +57,13 @@ window_addresses=$(hyprctl clients -j | jq -r '.[].address')
 for address in $window_addresses; do
     log "[*] Attempting to close window at address: $address"
     if ! $dry_run; then
-        hyprctl dispatch focuswindow address:$address
-        sleep 0.2
-        hyprctl dispatch closewindow
+        hyprctl dispatch closewindow address:$address
     else
         log "[dry-run] Would close: $address"
     fi
     sleep 0.5  # allow app time to respond
 done
 
-# Check immediately if all windows have closed
 remaining_clients=$(check_remaining_clients 3)
 
 if [[ -z "$remaining_clients" ]]; then 
@@ -105,8 +102,8 @@ fi
 
 # Proceed to shutdown or dry-run
 if $dry_run; then
-    echo "[dry-run] Would now execute: systemctl $action"
+    log "[dry-run] Would now execute: systemctl $action"
 else
-    echo "[*] Executing: systemctl $action"
+    log "[*] Executing: systemctl $action"
     systemctl "$action"
 fi
