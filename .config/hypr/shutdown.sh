@@ -43,18 +43,25 @@ check_remaining_clients() {
     return 0
 }
 
+log() {
+  echo "$1"
+  logger -t graceful-shutdown "$1"
+}
+
+log "[+] Graceful shutdown initiated with action: $action (dry-run: $dry_run)"
+#
 # Collect all window addresses
 window_addresses=$(hyprctl clients -j | jq -r '.[].address')
 
 # Loop through each window and attempt graceful close
 for address in $window_addresses; do
-    echo "Attempting to close window at address: $address"
+    log "[*] Attempting to close window at address: $address"
     if ! $dry_run; then
         hyprctl dispatch focuswindow address:$address
         sleep 0.2
         hyprctl dispatch closewindow
     else
-        echo "[dry-run] Would close: $address"
+        log "[dry-run] Would close: $address"
     fi
     sleep 0.5  # allow app time to respond
 done
@@ -63,36 +70,37 @@ done
 remaining_clients=$(check_remaining_clients 3)
 
 if [[ -z "$remaining_clients" ]]; then 
-  echo "[✓] All windows closed immediately."
+  log "[✓] All windows closed immediately."
 else
-  echo "[*] Some windows still open"
+  log "[*] Some windows still open"
   window_list=$(echo "$remaining_clients" | jq -r '.[] | "\(.class) - \(.title)"' | sort | uniq)
   message="The following windows are still open:\n\n$window_list\n\nForce close them?"
-  kdialog --yesno "$message"
+  kdialog --yesno "$message" --title "Force Close Remaining Apps"
   if [[ $? -eq 0 ]]; then
     if $dry_run; then
-      echo "[dry-run] Would force close: $window_list"
+      log "[dry-run] Would force close: $window_list"
     else
       echo "$remaining_clients" | jq -r '.[].pid' | xargs -r kill -9
       sleep 1
     fi
   else
-    echo "[!] Shutdown aborted by user."
+    log "[!] Shutdown aborted by user."
     exit 1
   fi
 
   remaining_clients=$(check_remaining_clients 3)
   if [[ -z "$remaining_clients" ]]; then
-    echo "[✓] All windows closed after wait."
+    log "[✓] All windows closed after wait."
   else
     final_window_list=$(echo "$remaining_clients" | jq -r '.[] | "\(.class) - \(.title)"' | sort | uniq)
-    echo "[✗] Some windows could not be closed:"
-    echo "$final_window_list"
+    log "[✗] Some windows could not be closed:"
+    while IFS= read -r line; do
+      log "[!] Still open: $line"
+    done <<< "$final_window_list"
 
     kdialog --error "The following windows could not be closed:\n\n$final_window_list\n\nPlease close them manually." --title "Shutdown Aborted"
     exit 1
   fi
-
 fi
 
 # Proceed to shutdown or dry-run
