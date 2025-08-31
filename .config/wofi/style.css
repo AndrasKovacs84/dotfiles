@@ -1,0 +1,24 @@
+@import '/home/apha/.cache/wal/colors-waybar.css';
+
+window {
+  background-color: @color9;
+  color: @foreground;
+  font-family: "Cascadia Code NF";
+  font-size: 18px;
+}
+
+#input {
+  background-color: @color10;
+  color: @foreground;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#entry {
+  padding: 4px;
+}
+
+#entry:selected {
+  background-color: @color1;
+  color: @foreground;
+}
