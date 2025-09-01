@@ -6,6 +6,7 @@
   "astrolsp": { "branch": "main", "commit": "414775e4b49a46bd7105cc5498ea7bb312359bf2" },
   "astrotheme": { "branch": "main", "commit": "0a3fb361f1e3d6a0cbb42e93f3d01fb5203b6752" },
   "astroui": { "branch": "main", "commit": "4943abbd42674b43249313afe83b91065a40e4be" },
+  "auto-session": { "branch": "main", "commit": "3b5d8947cf16ac582ef00443ede4cdd3dfa23af9" },
   "better-escape.nvim": { "branch": "master", "commit": "199dcc2643dec5d8dbdab4ec672cf405224dcb3b" },
   "blink.cmp": { "branch": "main", "commit": "bae4bae0eedd1fa55f34b685862e94a222d5c6f8" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
