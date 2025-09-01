@@ -5,9 +5,9 @@ export VCPKG_ROOT="$HOME/vcpkg/"
 
 nv() {
   if [ $# -eq 0 ]; then
-    nohup neovide > /dev/null 2>&1 &
+    nohup neovide >/dev/null 2>&1 &
   else
-    nohup neovide "$1" > /dev/null 2>&1 &
+    nohup neovide "$1" >/dev/null 2>&1 &
   fi
 }
 
