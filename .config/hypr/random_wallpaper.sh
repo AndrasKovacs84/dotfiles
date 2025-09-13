@@ -19,3 +19,8 @@ pkill -SIGUSR2 waybar
 duration=$(shuf -n 1 -e "${DURATIONS[@]}")
 
 swww img "$wallpaper" --transition-type "random" --transition-duration "$duration"
+
+# Hack to "fix" ghosting of previous wallpaper behind new one:
+# set the random one we picked again only without transition
+sleep "$duration"
+swww img "$wallpaper" --transition-type none
