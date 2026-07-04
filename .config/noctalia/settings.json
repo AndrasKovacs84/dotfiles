@@ -619,8 +619,8 @@
     },
     "wallpaper": {
         "automationEnabled": true,
-        "directory": "/var/home/apha/Képek/Wallpapers/32_9",
-        "enableMultiMonitorDirectories": false,
+        "directory": "/home/apha/Képek/Wallpapers/32_9",
+        "enableMultiMonitorDirectories": true,
         "enabled": true,
         "favorites": [
         ],
